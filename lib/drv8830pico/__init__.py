@@ -3,6 +3,9 @@ import sys
 
 __version__ = '1.0'
 
+# Possible addresses for the controller taken from the library here: https://github.com/pimoroni/drv8830-python
+# in general, those will be compatible with Pimoroni's own driver.
+# if using a different DRV8830 board, you might need to adjust those
 I2C_ADDR1 = 0x60  # Default, both select jumpers bridged (not cut)
 I2C_ADDR2 = 0x61  # Cut A0
 I2C_ADDR3 = 0x63  # Cut A1
@@ -11,7 +14,7 @@ I2C_ADDR4 = 0x64  # Cut A0 and A1
 MOTOR_FORWARD = 0b10
 MOTOR_BACKWARD = 0b01
 MOTOR_BRAKE = 0b11
-MOTOR_COAST = 0b00
+MOTOR_COAST = 0b00 
 
 CONTROL_REGISTER_ADDR = 0x00
 ERROR_REGISTER_ADDR = 0x01
@@ -23,11 +26,11 @@ ERROR_OTS_BIT = 0b0001
 ERROR_ILIMIT_BIT = 0b00001
 ERROR_CLEAR_FAULTS_BIT = 0b10000000
 
-DEBUG_PRINT = True
+DEBUG_PRINT = False
 
 class DRV8830:
 
-    #Voltage to index calculation taken from Pimoroni's own library here: https://github.com/pimoroni/drv8830-python
+    # Voltage to index calculation taken from Pimoroni's own library here: https://github.com/pimoroni/drv8830-python
     def VoltageToIndex(self, voltage):
         if voltage < 0.48 or voltage > 5.06:
             raise ValueError("Incorrect voltage for motor controller")
